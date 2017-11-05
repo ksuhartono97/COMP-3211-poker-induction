@@ -21,8 +21,9 @@ ctr = 0
 
 handArrCount = [0,0,0,0,0,0,0,0,0,0]
 
+# Oversampling stuff
+
 trainSet  = pd.read_csv('train.csv')
-# print(trainSet.iloc[0])
 
 model_variables = ['S1', 'C1', 'S2', 'C2', 'S3', 'C3',
                    'S4', 'C4', 'S5', 'C5', 'hand']
@@ -56,10 +57,11 @@ print('\nTest Results')
 print(clfRf.score(testFeatures, testTarget))
 # print(recall_score(testTarget, clfRf.predict(testFeatures)))
 
+# Old Code Area, for testing non oversampled
 with open('train.csv', 'rb') as csvfile:
-    trainReadResult = csv.reader(csvfile, delimiter=' ', quotechar='|')
-    next(trainReadResult);
-    for row in trainReadResult:
+    fileReader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    next(fileReader);
+    for row in fileReader:
         # print row
         splitted = row[0].split(',')
         handList = splitted[:-1]
@@ -105,7 +107,7 @@ print rf.score(testX, testY)
 
 rf.fit(xTrainRes, yTrainRes)
 print "Random forest, oversampling"
-print rf.score(testX, testY)
+print rf.score(xVal, yVal)
 
 resultDataRF = rf.predict(testX)
 
@@ -114,26 +116,28 @@ print resultDataRF
 resultPanda = pd.DataFrame(data=resultDataRF, columns=['hand'])
 print resultPanda.hand.value_counts()
 
-predictionX = []
+# For generating the submission
 
-with open('test.csv', 'rb') as csvfile:
-    testReader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-    next(testReader);
-    for row in testReader:
-        splitted = row[0].split(',')
-        handList = splitted[1:]
-        predictionX.append(np.array(handList))
-        # testY.append(int(splitted[-1]))
-
-resultDataRF = rf.predict(predictionX)
-
-print "Test File Results"
-print resultDataRF
-
-resultPanda = pd.DataFrame(data=resultDataRF, columns=['hand'])
-print resultPanda.hand.value_counts()
-resultPanda.index += 1
-resultPanda.to_csv("submission.csv", index_label='id', columns=['hand'])
+# predictionX = []
+#
+# with open('test.csv', 'rb') as csvfile:
+#     testReader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+#     next(testReader);
+#     for row in testReader:
+#         splitted = row[0].split(',')
+#         handList = splitted[1:]
+#         predictionX.append(np.array(handList))
+#
+# resultDataRF = rf.predict(predictionX)
+#
+# #File Writing Part
+# print "Test File Results"
+# print resultDataRF
+#
+# resultPanda = pd.DataFrame(data=resultDataRF, columns=['hand'])
+# print resultPanda.hand.value_counts()
+# resultPanda.index += 1
+# resultPanda.to_csv("submission.csv", index_label='id', columns=['hand'])
 
 # resultDataLR = lr.predict(testX)
 # resultDataMLP = clf.predict(testX)
