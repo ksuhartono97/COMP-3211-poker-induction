@@ -248,9 +248,9 @@ for i in range(0, int(four)):
     df= df.append(straight)
 
 print("Creating more data for Flush")
-suit_number = random.sample(suit_number_list, 1)
 flush_dict = {}
 for i in range(0, int(five)):
+    suit_number = random.sample(suit_number_list, 1)
     flush_dict['S1'] = suit_number
     flush_dict['S2'] = suit_number
     flush_dict['S3'] = suit_number
