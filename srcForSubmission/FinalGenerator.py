@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[136]:
+# In[1]:
 
 
 import numpy as np
@@ -18,7 +18,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.svm import SVC
 
 
-# In[137]:
+# In[2]:
 
 
 #Importing the training dataset
@@ -34,7 +34,7 @@ xTrain, xVal, yTrain, yVal = train_test_split(x,
                                               random_state=12)
 
 
-# In[138]:
+# In[3]:
 
 
 #Printing out the hand distribution values
@@ -43,7 +43,7 @@ print "Data distribution for the hand"
 print pdY.hand.value_counts()
 
 
-# In[139]:
+# In[4]:
 
 
 # Trying out SMOTE and Tomek Chains for over and under sampling of data
@@ -53,7 +53,7 @@ print pdY.hand.value_counts()
 # Not a lot of improvement
 
 
-# In[140]:
+# In[5]:
 
 
 # Chi2 reduced the score by a lot too, even with the best k
@@ -62,14 +62,14 @@ print pdY.hand.value_counts()
 # xVal = chi2.transform(xVal);
 
 
-# In[143]:
+# In[6]:
 
 
 #Generate the model for RFE
 model = RandomForestClassifier(n_estimators= 140, max_features= 'auto',random_state= 22337, criterion= 'gini')
 
 
-# In[146]:
+# In[7]:
 
 
 #Create our classifier
@@ -78,10 +78,10 @@ clf = Pipeline([
     ('classification', RandomForestClassifier(n_estimators= 140, max_features= 'auto',random_state= 22337, criterion= 'gini'))
 ])
 #Fit the dataset to the classifier
-clf.fit(x, y)
+clf.fit(xTrain, yTrain)
 
 
-# In[145]:
+# In[8]:
 
 
 #Doing the prediction (testing split)
@@ -95,14 +95,14 @@ print pdPipePredicted.hand.value_counts()
 print metrics.classification_report(yVal, pdPipePredicted)
 
 
-# In[134]:
+# In[9]:
 
 
 # Printout the confusion matrix
 print confusion_matrix(yVal, pdPipePredicted)
 
 
-# In[147]:
+# In[10]:
 
 
 # Here on is submission generation, only run if needed (don't run over this point), if on .py file, may want to comment this part
@@ -112,14 +112,21 @@ testEncoded = pd.get_dummies(testSet)
 testX = testEncoded.drop(['id'], axis=1)
 
 
-# In[148]:
+# In[11]:
+
+
+#Refit with whole set
+clf.fit(x, y)
+
+
+# In[12]:
 
 
 # Predict the result
 resultDataRF = clf.predict(testX)
 
 
-# In[149]:
+# In[13]:
 
 
 # Construct a csv file for submission to kaggle
