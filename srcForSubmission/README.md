@@ -19,11 +19,10 @@ Project is being attempted with Python.
   - `BenchmarkingRFE`: are our testing logs of for the best number of features from RFE
   - `BenchmarkOverunderSampling`: is our trials on the SMOTE and SMOTETomek
 
-
 ## data-generator.py
 - You could find the explaination of the code as comment in data-generator.py
 - Note that data-generator.py is used to balence the given kaggle data. Since kaggle already have a lot of 0 hand data. So only hands from 1 to 9 can be added.
-- Insert the file name if your file is allocated in the same folder or insert the file path for the .csv file that you would like to have more data.
+- Follow the instrcution from the program, insert the file name if your file is allocated in the same folder or insert the file path for the .csv file that you would like to have more data.
 - The program would print out the number of each sets of each set.
 - Input the number of poker card hands you want from 0 to 9.
 - Wait for completion
