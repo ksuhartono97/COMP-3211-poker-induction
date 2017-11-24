@@ -4,7 +4,10 @@ import random
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score
 
+# all the possible suits are are 1,2,3,4
 suit_number_list = list(range(1, 5))
+
+#all the possible rank in a card are 1,2,3,4,5,6,7,8,9,10,11,12,13
 card_number_list = list(range(1, 14))
 
 file = raw_input("Indicate file name that you would like to add: ")
@@ -12,6 +15,7 @@ print("Reading training file")
 df = pd.read_csv(str(file))
 counts = df['hand'].value_counts().to_dict()
 print(counts)
+#getting user inputs on how much data they want on a specific poker hand
 one = raw_input("Indicate how much more 1 you would like to add: ")
 two = raw_input("Indicate how much more 2 you would like to add: ")
 three = raw_input("Indicate how much more 3 you would like to add: ") 
@@ -22,8 +26,12 @@ seven = raw_input("Indicate how much more 7 you would like to add: ")
 eight = raw_input("Indicate how much more 8 you would like to add: ")
 nine = raw_input("Indicate how much more 9 you would like to add: ")
 
+#user indicates the name of their output file
 output = raw_input("Output file name: ")
 
+#Note all the poker hand function bellow would follow the rule from the comment and then randomize the order.
+
+#Uses random to generate one random number in the card_number_list. Two of the new data number will uses this number. Then generate other 3 random number as well as random suit. This forms a one pair.
 print("Creating more data for one pair")
 for i in range(0, int(one)):
     temp_num_list = card_number_list[:]
@@ -79,6 +87,7 @@ for i in range(0, int(one)):
     print(one_pair)
     df= df.append(one_pair)
 
+#Generate two random number that is not duplicate of each other and generate two different suit for each. Then generate a third random number that is not the same as the previous four and generate a random suit.
 print("Creating more data for Two Pair")
 for i in range(0, int(two)):
     temp_num_list = card_number_list[:]
@@ -139,7 +148,7 @@ for i in range(0, int(two)):
     print(two_pair)
     df= df.append(two_pair)
 
-
+#Generate a rank from card_number_list and generate 3 different suits for it. Then generate two different number that is not the same rank and generate a random suit to each
 print("Creating more data for Three of a kind")
 for i in range(0, int(three)):
     temp_num_list = card_number_list[:]
@@ -197,6 +206,7 @@ for i in range(0, int(three)):
     print(three_kind)
     df= df.append(three_kind)
 
+#generate a random number from 1 to 9 and then generate other four rank by stepping the rank by one each time.
 print("Creating data for Straight")
 for i in range(0, int(four)):
     temp_suit_list = suit_number_list[:]
@@ -247,6 +257,7 @@ for i in range(0, int(four)):
     print(straight)
     df= df.append(straight)
 
+#Generate one random suit from suit_list and then generate four different number
 print("Creating more data for Flush")
 flush_dict = {}
 for i in range(0, int(five)):
@@ -280,7 +291,8 @@ for i in range(0, int(five)):
     print("Inserting new flush data:")
     print(flush)
     df= df.append(flush)
-    
+
+#Generate two random number that is not duplicate of each other and generate two different suit for each. Then generate a rank from card_number_list and generate 3 different suits for it.
 print("\nCreating more data for Full house")
 for x in range(0, int(six)):
     # same card number, but 2 different suit
@@ -343,6 +355,7 @@ for x in range(0, int(six)):
     print(full_house)
     df= df.append(full_house)
 
+#generate a random number and make four copies and then generate different random suit for each of the four. Then generate a random number and suit.
 print("\nCreating more data for Four of a kind")
 for x in range(0, int(seven)):
     # get card number 1 and 2
@@ -383,7 +396,8 @@ for x in range(0, int(seven)):
     print("Inserting new four of a kind:")
     print(four_kind)
     df= df.append(four_kind)
-    
+
+#Generate a random suit from suit_list and then generate the ranks like it did in the flush.
 print("\nCreating more data for Straight Flush")
 for i in range(0, int(eight)):
     c_num = list(range(1, 9))
@@ -430,6 +444,7 @@ for i in range(0, int(eight)):
     print(straight_flush)
     df= df.append(straight_flush)
 
+#Generate a random suit and assign each to 10,11,12,13,1.
 print("\nCreating Royal Flush")
 
 for i in range(0, int(nine)):
