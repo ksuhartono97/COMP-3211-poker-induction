@@ -18,5 +18,6 @@ Project is being attempted with Python.
   - `ClassifierComparisons`: is a comparison of different classifiers
   - `BenchmarkingRFE`: are our testing logs of for the best number of features from RFE
   - `BenchmarkOverunderSampling`: is our trials on the SMOTE and SMOTETomek
+  - 'oracles': is used for identify the hands from the given csv file with explicit coding instruction
 
   **Do note that these were all designed to work with the Jupyter Notebook for a clearer presentation of results, therefore there aren't that many print labels describing what is printed**
