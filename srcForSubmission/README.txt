@@ -18,6 +18,21 @@ Project is being attempted with Python.
   - `ClassifierComparisons`: is a comparison of different classifiers
   - `BenchmarkingRFE`: are our testing logs of for the best number of features from RFE
   - `BenchmarkOverunderSampling`: is our trials on the SMOTE and SMOTETomek
-  - 'oracles': is used for identify the hands from the given csv file with explicit coding instruction
+
+## data-generator.py
+- You could find the explaination of the code as comment in data-generator.py
+- Note that data-generator.py is used to balence the given kaggle data. Since kaggle already have a lot of 0 hand data. So only hands from 1 to 9 can be added.
+- Follow the instrcution from the program, insert the file name if your file is allocated in the same folder or insert the file path for the .csv file that you would like to have more data.
+- The program would print out the number of each sets of each set.
+- Input the number of poker card hands you want from 0 to 9.
+- Wait for completion
+- Output the file name that you would like to export. E.g. balence.csv
+
+## oracles.py
+- This script is used to identify the hands from the given csv file and it is coded by explicit rules of poker game
+- You could find the explaination of the code as comment in oracles.py
+- Follow the instruction from the program, insert the csv file name you want to identify. If your file is allocated in the same folder just type the name, otherwise insert the file path of the file.
+- The program would scan the target csv file, print the row ID of the cards and its corresponding hands
+- Output the file name that you would like to export. E.g. oracle_submission.csv
 
   **Do note that these were all designed to work with the Jupyter Notebook for a clearer presentation of results, therefore there aren't that many print labels describing what is printed**
